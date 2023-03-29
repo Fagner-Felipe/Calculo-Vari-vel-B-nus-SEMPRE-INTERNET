@@ -1,0 +1,227 @@
+<meta charset="UTF-8">
+<html>
+    <head>
+        <title>Calculo Váriavel</title>
+
+        <link rel="stylesheet" type="text/css" href="style.css"
+
+    </head>
+
+
+    <body>
+        <center><h1>Calculo Variável Bonus</h1></center>
+        <div class="div1">
+        <br><br>
+        <p>Informe total de demandas do tipo suporte </p>
+        <input type="number" id='demanda'/>
+        <p>Informe total de horas de execução</p>
+        <input type="number" id='tme'/>
+        <p>Informe qnt de demandas realizadas dentro do prazo</p>
+        <input type="number" id='sla'/>
+        <p>Informe qnt de demandas de retrabalho </p>
+        <input type="number" id='rtb'/>
+        <p>Informe o percentual de SUPORTE X BASE</p>
+        <input type="number" id='supBas'/>
+
+       
+        </div>
+        <br><br>
+        <ul>
+            <button id="btn">Calcular</button>
+            <p id="resultado"> :</p>
+        </ul>
+
+        <script>
+
+            /*LEGENDA:
+
+            TME - Média de todos os serviços finalizados do tipo SUPORTE.
+            72hrs - R$ 0,00 reais
+            48hrs - R$ 40,00 reais
+            36hrs - R$ 60,00 reais
+            24hrs - R$ 100,00 reais
+
+            SLA - Percentual entregue dentro do prazo.
+            00% à 64% - R$ 0,00 reias
+            65% à 69% - R$ 80,00 reais
+            70% à 79% - R$ 120,00 reais
+            80% à 100% - R$ 200,00 reais
+
+            RETRABALHO - SUPORTE abertas no prazo de 30 dias ao ultimo serviço.
+            30% à 100% - R$ 0,00 reais
+            20% à 29% - R$ 40,00 reais
+            10% à 19% - R$ 60,00 reais
+            00% à 09% - R$ 100,00 reais
+
+            SUPORTE X BASE - Qtd de Suporte em relação a base de clientes ativos na regional.
+            8,1% à 100% - R$ 00,00 reais
+            7,1% à 08% - R$ 40,00 reais
+            6,6% à 07% - R$ 60,00 reais
+            0% à 6,5% - R$ 100,00 reias*/
+
+
+            //TME - Média de todos os serviços finalizados do tipo SUPORTE.
+           var demandasTotal = document.getElementById("demanda");
+           var tmeTotal = document.getElementById("tme");
+           var tmeMedia = parseFloat(tmeTotal.value / demandasTotal.value);
+           var tmeVar = parseInt();
+        
+            if (tmeMedia <= 24){
+                tmeVar = 100
+            }
+
+            if (tmeMedia >= 25){
+                tmeVar = 100
+            }
+
+            if (tmeMedia <= 36){
+                tmeVar = 60
+            }
+
+            if (tmeMedia >= 37){
+                tmeVar = 60
+            }
+
+            if (tmeMedia <= 71);{
+                tmeVar = 40
+            }
+
+            if (tmeMedia >= 72){
+                tmeVar = 0
+            }
+
+            //SLA - Percentual entregue dentro do prazo.
+
+            
+            var slaPositiva = document.getElementById("sla");
+            var slaPercentual = (slaPositiva.value * 100) / demandasTotal.value;
+            var slaVariavel = parseInt();
+
+           
+            if (slaPercentual >= 0){
+                slaVariavel = 0
+            }
+
+            if (slaPercentual <= 64){
+                slaVariavel = 0
+            }
+            
+            if (slaPercentual >= 65){
+                slaVariavel = 80
+            }
+            
+            if (slaPercentual <= 69){
+                slaVariavel = 80
+            }
+            
+            if (slaPercentual >= 70){
+                slaVariavel = 120
+            }
+            
+            if (slaPercentual <= 79){
+                slaVariavel = 120
+            }
+            
+            if (slaPercentual >= 80){
+                slaVariavel = 200
+            }
+            
+            if (slaPercentual <= 100){
+                slaVariavel = 200
+            }
+
+
+            //RETRABALHO - SUPORTE abertas no prazo de 30 dias ao ultimo serviço.
+
+            var retrabalhoTotal = document.getElementById("rtb");
+            var retrabalhoPerc = (retrabalhoTotal.value * 100) / demandasTotal.value;
+            var retrabalhoVar = parseInt();
+
+            if (retrabalhoPerc >= 0){
+                retrabalhoVar = 100
+            }
+
+            if (retrabalhoPerc <= 9){
+                retrabalhoVar = 100
+            }
+
+            if (retrabalhoPerc >= 10){
+                retrabalhoVar = 60
+            }
+
+            if (retrabalhoPerc <= 19){
+                retrabalhoVar = 60
+            }
+
+            if (retrabalhoPerc >= 20){
+                retrabalhoVar = 40
+            }
+            if (retrabalhoPerc <= 29){
+                retrabalhoVar = 40
+            }
+
+            if (retrabalhoPerc >= 30){
+                retrabalhoVar = 0
+            }
+            
+            if (retrabalhoPerc <= 100){
+                retrabalhoVar = 0
+            }
+
+            //SUPORTE X BASE - Qtd de Suporte em relação a base de clientes ativos na regional.
+            //Para o calculo dessa vaiável será capturado o percentual da retaguarda e comparado com a legenda para obtenção do valor a ser pago.
+
+            var suporteBasPerc = document.getElementById("supBas");
+            var suporteBasVar = parseInt();
+
+            if (suporteBasPerc >= 6.6){
+                suporteBasVar = 60
+            }
+
+            if (suporteBasPerc <= 7.0){
+                suporteBasVar = 60
+            }
+
+            if (suporteBasPerc >= 7.1){
+                suporteBasVar = 40
+            }
+            
+            if (suporteBasPerc <= 8.0){
+                suporteBasVar = 40
+            }
+
+            if (suporteBasPerc >= 8.1){
+                suporteBasVar = 0
+            }
+
+            function somar()
+            {
+                let tmeTotalInt = parseInt(tmeVar);
+                let slaVariavelInt = parseInt(slaVariavel.value);
+                let retrabalhoVarInt = parseInt(retrabalhoVar.value);
+                let suporteBasVarInt = parseInt(suporteBasVar.value);
+                let soma = tmeTotalInt + slaVariavelInt + retrabalhoVarInt + suporteBasVarInt;
+        
+                //console.log(soma.value);
+                console.log(slaPercentual.value);
+                //console.log(tme);
+                console.log(suporteBasVar.value);
+                console.log(retrabalhoPerc);
+                console.log(tmeMedia.value);
+                //console.log(typeof retrabalhoVar);
+
+                document.getElementById("resultado").innerHTML = "O valor da variável é:  "+soma;
+
+                return soma;
+        
+            }
+        var button = document.querySelector("#btn");
+        button.onclick = somar;
+    
+        </script>
+
+    <div class="div2">
+        <p id="resultado"> :</p>
+    </div>
+    </body>
+</html>
