@@ -1,2 +1,2 @@
-# Calculo-Vari-vel-B-nus-SEMPRE-INTERNET
+# Calculo-Variável-Bônus-SEMPRE-INTERNET
 Arquivo HTML para calculo da variável bônus
